@@ -12,7 +12,8 @@ function joingame() {
     request.onload = function() {
         var data = request.response;
         uuid = data["player_id"];
-        document.getElementById("hand").innerhtml = uuid;
+        document.getElementById("hand").innerHTML = uuid;
+        gethand();
     }
     request.open(method, url, true);
 
