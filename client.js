@@ -12,7 +12,7 @@ function joingame() {
     request.onload = function() {
         var data = request.response;
         uuid = data["player_id"];
-        document.getElementById("hand").innerHTML = uuid;
+        document.getElementById("uuid").innerHTML = uuid;
         gethand();
     }
     request.open(method, url, true);
@@ -22,7 +22,7 @@ function joingame() {
 }
 
 function gethand() {
-    var url = "http://gentle-dusk-59337.herokuapp.com/hand";
+    var url = "https://gentle-dusk-59337.herokuapp.com/hand";
     var method = "POST";
     var data = JSON.stringify({
         player_id: uuid
@@ -32,7 +32,12 @@ function gethand() {
 
     request.onload = function() {
         var data = request.response;
-        console.log(data);
+        for (var card in data["hand"]) {
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(data["hand"][card]);
+            node.appendChild(textnode);
+            document.getElementById("hand").appendChild(node);
+        }
     }
     request.open(method, url, true);
 
